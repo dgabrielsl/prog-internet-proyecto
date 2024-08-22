@@ -1,0 +1,39 @@
+#system-out-data{
+    height: 100vh;
+    padding: 2em;
+    box-shadow:
+        inset 20px 20px 5px #ccc,
+        inset -20px -20px 5px #fff;
+}
+#system-out-data > div{
+    padding: 1em;
+    height: calc(100vh - 4em);
+    box-shadow:
+        -9px 0 5px #fff,
+        0 -9px 5px #fff,
+        inset 9px 9px 9px #ccc,
+        inset -9px -9px 9px #fff,
+        9px 0 5px #ccc,
+        0 9px 5px #ccc;
+    border-radius: 18px;
+}
+#system-out-data > div > div{
+    padding: 1.5em;
+    height: calc(100vh - 6em);
+    box-shadow:
+        -5px -5px 5px #fff,
+        5px 5px 5px #ccc;
+    border-radius: .5em;
+}
+#current-logged-user{
+    padding: .75em 2em;
+    color: var(--hl);
+    font-size: 1em;
+    font-weight: 600;
+    font-style: italic;
+    text-align: right;
+    box-shadow:
+        inset 2px 5px 3px #ccc,
+        inset -2px -5px 3px #fff;
+    border-radius: 3em;
+}

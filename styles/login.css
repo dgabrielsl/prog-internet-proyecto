@@ -141,10 +141,12 @@
         text-decoration: underline;
     }
 }
-#error-message{
-    margin: .5em 0 1.75em;
+#error-message,
+#success-message,
+#error-message-1,
+#error-message-2{
     padding: 1em;
-    color: var(--hl);
+    color: #f00;
     font-weight: 500;
     font-size: 1.1em;
     text-align: center;
@@ -155,4 +157,7 @@
         inset -5px -5px 5px #fff;
     border-radius: 18px;
     display: none;
+}
+form p{
+    margin-top: 1em;
 }

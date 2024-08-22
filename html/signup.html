@@ -23,11 +23,15 @@
             </div>
             <div class="form-wrapper">
                 <h1 class="fw-h1">Crear cuenta nueva</h1>
-                <form action="" class="user-log-pages-forms">
-                    <input type="email" name="login-page-input-email" class="login-page-input" maxlength="30" placeholder="Ingresa tu e-mail" required autofocus>
-                    <input type="email" name="login-page-input-email" class="login-page-input" maxlength="30" placeholder="Confirmar e-mail" required>
-                    <input type="password" name="login-page-input-password" class="login-page-input" maxlength="15" placeholder="Crear contraseña" required>
-                    <input type="password" name="login-page-input-password" class="login-page-input" maxlength="15" placeholder="Confirmar contraseña" required>
+                <form action="../php/create-account.php" method="POST" class="user-log-pages-forms">
+                    <input type="email" name="username" class="login-page-input" maxlength="30" placeholder="Usuario (correo)" required autofocus>
+                    <input type="password" name="password" class="login-page-input" maxlength="30" placeholder="Crear contraseña nueva" required>
+                    <input type="password" name="password-confirm" class="login-page-input" maxlength="30" placeholder="Confirmar contraseña" required>
+                    <p id="error-message-1"></p>
+                    <p>Por favor ingrese sus credenciales de administrador:</p>
+                    <input type="text" name="admin-username" class="login-page-input" maxlength="30" placeholder="Usuario" required>
+                    <input type="password" name="admin-password" class="login-page-input" maxlength="30" placeholder="Contraseña" required>
+                    <p id="error-message-2"></p>
                     <button type="submit" id="get-logged" class="submit-btn">Registrarme</button>
                 </form>
                 <p class="log-other-options">Ya tienes cuenta? <a href="../index.html" class="user-log-pages-a" id="goto-signup">Ingresar</a></p>
@@ -35,5 +39,18 @@
             </div>
         </div>
     </div>
-    <script src="../scripts/login.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            const params = new URLSearchParams(window.location.search);
+
+            if(params.get('error') === '1'){
+                $('#error-message-2').css("display", "block");
+                $('#error-message-2').text("Las credenciales de administrador son incorrectas");
+            }else if(params.get('error') === '2'){
+                $('#error-message-1').css("display", "block");
+                $('#error-message-1').text("Las contraseñas no coinciden");
+            };
+        });
+    </script>
 </html>

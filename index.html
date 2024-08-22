@@ -24,17 +24,12 @@
             <div class="form-wrapper">
                 <h1 class="fw-h1">Ingresar credenciales</h1>
                 <form method="POST" action="php/login.php" class="user-log-pages-forms">
-                    <!--
-                        <input type="email" name="login-page-input-username" class="login-page-input" maxlength="30" placeholder="email@domain.com" required autofocus value="gsolano@vpts.co">
-                        <input type="password" name="login-page-input-password" class="login-page-input" maxlength="15" placeholder="*****" required value="admin">
-                    -->
-                    
-                    <input type="email" name="login-page-input-username" class="login-page-input" maxlength="30" placeholder="email@domain.com" required autofocus>
-                    <input type="password" name="login-page-input-password" class="login-page-input" maxlength="15" placeholder="*****" required>
-
+                    <input type="email" name="login-page-input-username" class="login-page-input" maxlength="30" placeholder="email@domain.com" required autofocus value="gsolano@vipts.com">
+                    <input type="password" name="login-page-input-password" class="login-page-input" maxlength="15" placeholder="*****" required value="admin">
+                    <p id="error-message">Usuario o contraseña incorrecta.</p>
                     <button type="submit" id="get-logged" class="submit-btn">Ingresar</button>
+                    <p id="success-message"></p>
                 </form>
-                <p id="error-message">Usuario o contraseña incorrecto.</p>
                 <p class="log-other-options">Aún no tienes cuenta? <a href="html/signup.html" class="user-log-pages-a" id="goto-signup">Crear cuenta</a></p>
                 <p class="log-other-options"><a href="html/recovery.html" class="user-log-pages-a" id="goto-recovery">Recuperar contraseña</a></p>
             </div>
@@ -42,12 +37,19 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function(){
             const params = new URLSearchParams(window.location.search);
-            if (params.get('error') === '1') {
+            const username = params.get('username');
+
+            if(params.get('error') === '1'){
                 $('#error-message').css("display", "block");
-            }
+            }else if(params.get('success') === '1'){
+                $('#success-message').css("display", "block");
+                let msg = "El usuario " + username + " se ha creado correctamente.";
+                $('#success-message').text(msg);
+                $('#success-message').css("margin-bottom", "1.5em");
+                $('#success-message').css("color", "#0a0");
+            };
         });
     </script>
-    
 </html>
