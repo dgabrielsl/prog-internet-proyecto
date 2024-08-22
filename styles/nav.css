@@ -1,0 +1,90 @@
+button{
+    border: none;
+    outline: none;
+    background-color: var(--bg);
+    cursor: pointer;
+    &:focus{
+        outline: none;
+    }
+}
+#sheet{
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+nav{
+    margin: 2.5em;
+    width: calc(100% - 5em);
+    min-height: calc(100% - 5em);
+    align-self: center;
+    justify-self: center;
+    border-radius: 1em;
+    box-shadow:
+        -2px -9px 5px #fff,
+        inset 25px 25px 50px #ffffffaa,
+        inset -25px -25px 50px #cccccc33,
+        2px 9px 5px #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+nav > div{
+    margin: .75em;
+    padding: 1em;
+    width: 100%;
+    box-shadow:
+        inset 5px 5px 15px #ccc,
+        inset -5px -5px 15px #fff;
+    border-radius: 5px;
+}
+nav > div > div{
+    padding: 3em 2em;
+    width: 100%;
+    box-shadow:
+        -5px -5px 5px #fff,
+        5px 5px 5px #ccc;
+    border-radius: 5px;
+}
+nav h1{
+    margin: .5em .5em 0em;
+    font-weight: 600;
+    color: var(--hl);
+    font-size: 1.5em;
+}
+nav h2{
+    margin: 0 .5em 1em;
+    font-weight: 200;
+    font-size: 1.1em;
+    font-style: italic;
+    color: #555;
+}
+.a-main-nav-menu{
+    margin: 1.5em 0;
+    width: 100%;
+    display: grid;
+    text-decoration: none;
+}
+.a-btn-from-nav-menu{
+    padding: .7em;
+    text-align: left;
+    font-size: 1.2em;
+    font-weight: 300;
+    box-shadow:
+        -3px -6px 3px #fff,
+        3px 6px 3px #ccc;
+    border-radius: 9px;
+    transition: .1s;
+    &:hover{
+        color: var(--hl);
+        scale: 1.05;
+    }
+}
+.amnm-focused{
+    color: var(--hl);
+    scale: 1.05;
+    box-shadow:
+        -3px -6px 3px #fff,
+        inset 9px 9px 9px #ddd,
+        inset -9px -9px 9px #fff,
+        3px 6px 3px #ccc;
+}
