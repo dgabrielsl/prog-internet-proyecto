@@ -34,7 +34,7 @@
                             <button class="a-btn-from-nav-menu">Crear reporte</button>
                         </a>
                         <a href="inventory.html" class="a-main-nav-menu">
-                            <button class="a-btn-from-nav-menu amnm-focused">Equipos</button>
+                            <button class="a-btn-from-nav-menu amnm-focused">Inventario</button>
                         </a>
                         <a href="../index.html" class="a-main-nav-menu">
                             <button class="a-btn-from-nav-menu" id="log-out-nav-btn">Cerrar sesión</button>
@@ -56,6 +56,7 @@
                                 <div>
                                     <input type="text" name="act-model" placeholder="Modelo" required>
                                     <input type="text" name="act-serial" placeholder="Número de serie" required>
+                                    <input type="hidden" name="inserted-by" id="inserted-by" readonly required>
                                 </div>
                                 <div>
                                     <button type="reset" id="fina-reset">Limpiar</button>
@@ -63,7 +64,7 @@
                                 </div>
                             </form>
                             <p id="result-log-message">*</p>
-                            <h2 class="section-instructions">Lista de equipos en inventario:</h2>
+                            <a href="../php/inventory-query.php" target="_blank"><h2 class="section-instructions">🔎 Ver la lista de equipos en inventario</h2></a>
                         </div>
                     </div>
                 </div>
@@ -75,7 +76,9 @@
         $(document).ready(function(){
             $.getJSON('../php/fetch_username.php', function(data) {
                 $('#current-logged-user').text(data.username);
+                $('#inserted-by').val(data.username);
             });
+
             $("#fina-reset").click(()=>{
                 $('#form-insert-new-active input:first').focus();
             });

@@ -14,8 +14,8 @@ $act_name = $_POST['act-name'];
 $act_brand = $_POST['act-brand'];
 $act_model = $_POST['act-model'];
 $act_serial = $_POST['act-serial'];
+$inserted_by = $_POST['inserted-by'];
 
-$inserted_by = 
 $log_date = date('Y-m-d');
 $time_mark = date('H:i:s');
 
