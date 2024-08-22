@@ -22,18 +22,3 @@ body,
 #site{
     background-color: var(--bg);
 }
-#site{
-    animation: slide-in .7s;
-}
-@keyframes slide-in{
-    from{
-        opacity: 0;
-        scale: .97;
-    }
-    55%{
-        scale: 1.02;
-    }
-    70%{
-        scale: .99  ;
-    }
-}

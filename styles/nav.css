@@ -88,3 +88,15 @@ nav h2{
         inset -9px -9px 9px #fff,
         3px 6px 3px #ccc;
 }
+nav{
+    animation: slide-in .5s;
+}
+@keyframes slide-in{
+    from{
+        opacity: 0;
+        scale: 0.5;
+    }
+    60%{
+        scale: 1.1;
+    }
+}

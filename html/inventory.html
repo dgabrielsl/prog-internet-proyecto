@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="../media/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../styles/index.css">
     <link rel="stylesheet" href="../styles/nav.css">
-    <link rel="stylesheet" href="../styles/board.css">
+    <link rel="stylesheet" href="../styles/section.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
@@ -42,7 +42,58 @@
                     </div>
                 </div>
             </nav>
+            <section>
+                <div id="system-out-data">
+                    <div>
+                        <div>
+                            <h1 id="current-logged-user"></h1>
+                            <h2 class="section-instructions">Para ingresar un nuevo equipo al inventario, por favor llene el siguiente formulario:</h2>
+                            <form action="../php/update-inventory.php" method="post" id="form-insert-new-active">
+                                <div>
+                                    <input type="text" name="act-name" placeholder="Descripción: laptop, impresora, teclado" autofocus required>
+                                    <input type="text" name="act-brand" placeholder="Marca" required>
+                                </div>
+                                <div>
+                                    <input type="text" name="act-model" placeholder="Modelo" required>
+                                    <input type="text" name="act-serial" placeholder="Número de serie" required>
+                                </div>
+                                <div>
+                                    <button type="reset" id="fina-reset">Limpiar</button>
+                                    <button type="submit">Guardar</button>
+                                </div>
+                            </form>
+                            <p id="result-log-message">*</p>
+                            <h2 class="section-instructions">Lista de equipos en inventario:</h2>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
     </div>
-    <script src="../scripts/index.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.getJSON('../php/fetch_username.php', function(data) {
+                $('#current-logged-user').text(data.username);
+            });
+            $("#fina-reset").click(()=>{
+                $('#form-insert-new-active input:first').focus();
+            });
+
+            const params = new URLSearchParams(window.location.search);
+            
+            if(params.get('error') === '1'){
+                $('#result-log-message').css("display", "block");
+                $('#result-log-message').text("Error al insertar el registro.");
+            }else if(params.get('act_name')){
+                const actName = params.get('act_name');
+                const actBrand = params.get('act_brand');
+                const actModel = params.get('act_model');
+                const actSerial = params.get('act_serial');
+
+                $('#result-log-message').css("display", "block");
+                $('#result-log-message').text(`✅ Registro (${actName} / ${actBrand} / ${actModel} / ${actSerial}) agregado correctamente.`);
+            };
+        });
+    </script>
 </html>
