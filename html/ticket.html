@@ -30,7 +30,7 @@
                             <button class="a-btn-from-nav-menu">Mis tickets</button>
                         </a>
                         <a href="ticket.html" class="a-main-nav-menu">
-                            <button class="a-btn-from-nav-menu amnm-focused">Crear reporte</button>
+                            <button class="a-btn-from-nav-menu amnm-focused">Crear solicitud</button>
                         </a>
                         <a href="inventory.html" class="a-main-nav-menu">
                             <button class="a-btn-from-nav-menu">Inventario</button>
@@ -46,6 +46,27 @@
                     <div>
                         <div>
                             <h1 id="current-logged-user"></h1>
+                            <h2 class="section-instructions">✅ Complete el siguiente formulario para notificar de errores y peticiones a soporte técnico.</h2>
+                            <form action="../php/send-ticket.php" method="post" enctype="multipart/form-data" id="ticket-builder-form">
+                                <input type="text" name="ticket-form-username" placeholder="Nombre de usuario*" id="read-only-for-logged-username" required readonly>
+                                <input type="text" name="ticket-form-subject" placeholder="Asunto (breve)*" required>
+                                <textarea name="ticket-form-description" placeholder="Descripción de la solicitud*" required></textarea>
+                                <p>Adjuntar archivo/evidencia (opcional):</p>
+                                <input type="file" name="ticket-form-file" id="tbf-file-upload-btn">
+                                <label for="tbf-priority-options">Prioridad sugerida:</label>
+                                <select id="tbf-priority-options" name="tbf-priority-options" required>
+                                    <option value="opt-1">Baja</option>
+                                    <option value="opt-2" selected>Normal</option>
+                                    <option value="opt-3">Urgente</option>
+                                </select>
+                                <label for="tbf-priority-options" class="lightbulb">•</label>
+                                <div id="tbf-bttns">
+                                    <button type="reset">Limpiar formulario</button>
+                                    <button type="submit">Enviar</button>
+                                </div>
+                            </form>
+                            <p id="result-message">*</p>
+                            <p id="result-message-success">✅ Se ha enviado una notificación de confirmación su correo electrónico.</p>
                         </div>
                     </div>
                 </div>
@@ -55,9 +76,77 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function(){
-            $.getJSON('../php/fetch_username.php', function(data) {
-                $('#current-logged-user').text(data.username);
+            function set_user_session(){
+                $.getJSON('../php/fetch_username.php', function(data){
+                    $('#current-logged-user').text(`Sesión iniciada como: ${data.username}`);
+                    $('#read-only-for-logged-username').val(data.username);
+                });
+            };
+
+            set_user_session();
+
+            var btn = $("#tbf-file-upload-btn");
+
+            btn.on('change', ()=>{
+                if(btn.val()){
+                    btn.addClass('input-file-charged');
+                }else{
+                    btn.removeClass('input-file-charged');
+                };
+                btn.blur();
             });
+
+            select = $("#tbf-priority-options");
+            $(".lightbulb").css({
+                        "color": "#080",
+                        "background-color": "#080"
+                    });
+
+            select.on('change', ()=>{
+                if(select.val() == "opt-1"){
+                    $(".lightbulb").css({
+                        "color": "#00b",
+                        "background-color": "#00b"
+                    });
+                }else if(select.val() == "opt-2"){
+                    $(".lightbulb").css({
+                        "color": "#080",
+                        "background-color": "#080"
+                    });
+                }else if(select.val() == "opt-3"){
+                    $(".lightbulb").css({
+                        "color": "#b00",
+                        "background-color": "#b00"
+                    });
+                };
+            });
+
+            $("#ticket-builder-form").on('reset', ()=>{
+                set_user_session();
+                $("#ticket-builder-form input:nth-of-type(2)").focus();
+                $(".lightbulb").css({
+                    "color": "#080",
+                    "background-color": "#080"
+                });
+            });
+
+            $('#result-message').css("display", "none");
+            $('#result-message-success').css("display", "none");
+
+            const params = new URLSearchParams(window.location.search);
+
+            if(params.get('error') === '1'){
+                $('#result-message').css("display", "block");
+                $('#result-message').text("❌ Lo sentimos, ha ocurrido un error al crear el reporte, por favor, intente de nuevo.");
+            }else if(params.get('success')){
+                $('#result-message').css("display", "block");
+                $('#result-message-success').css("display", "block");
+
+                const subject = params.get('success');
+                $('#result-message').text(`✅ El ticket con asunto "${subject}" se ha creado correctamente.`);
+                $('#result-message-success').css("display", "block");
+
+            };
         });
     </script>
 </html>

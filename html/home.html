@@ -30,10 +30,10 @@
                             <button class="a-btn-from-nav-menu">Mis tickets</button>
                         </a>
                         <a href="ticket.html" class="a-main-nav-menu">
-                            <button class="a-btn-from-nav-menu">Crear reporte</button>
+                            <button class="a-btn-from-nav-menu">Crear solicitud</button>
                         </a>
                         <a href="inventory.html" class="a-main-nav-menu">
-                            <button class="a-btn-from-nav-menu">Equipos</button>
+                            <button class="a-btn-from-nav-menu">Inventario</button>
                         </a>
                         <a href="../index.html" class="a-main-nav-menu">
                             <button class="a-btn-from-nav-menu" id="log-out-nav-btn">Cerrar sesión</button>
@@ -55,8 +55,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function(){
-            $.getJSON('../php/fetch_username.php', function(data) {
-                $('#current-logged-user').text(data.username);
+            $.getJSON('../php/fetch_username.php', function(data){
+                $('#current-logged-user').text(`Sesión iniciada como: ${data.username}`);
             });
         });
     </script>

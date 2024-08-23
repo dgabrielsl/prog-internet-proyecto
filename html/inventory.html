@@ -31,7 +31,7 @@
                             <button class="a-btn-from-nav-menu">Mis tickets</button>
                         </a>
                         <a href="ticket.html" class="a-main-nav-menu">
-                            <button class="a-btn-from-nav-menu">Crear reporte</button>
+                            <button class="a-btn-from-nav-menu">Crear solicitud</button>
                         </a>
                         <a href="inventory.html" class="a-main-nav-menu">
                             <button class="a-btn-from-nav-menu amnm-focused">Inventario</button>
@@ -47,7 +47,7 @@
                     <div>
                         <div>
                             <h1 id="current-logged-user"></h1>
-                            <h2 class="section-instructions">Para ingresar un nuevo equipo al inventario, por favor llene el siguiente formulario:</h2>
+                            <h2 class="section-instructions">✅ Para ingresar un nuevo equipo al inventario, por favor llene el siguiente formulario:</h2>
                             <form action="../php/update-inventory.php" method="post" id="form-insert-new-active">
                                 <div>
                                     <input type="text" name="act-name" placeholder="Descripción: laptop, impresora, teclado" autofocus required>
@@ -75,7 +75,7 @@
     <script>
         $(document).ready(function(){
             $.getJSON('../php/fetch_username.php', function(data) {
-                $('#current-logged-user').text(data.username);
+                $('#current-logged-user').text(`Sesión iniciada como: ${data.username}`);
                 $('#inserted-by').val(data.username);
             });
 

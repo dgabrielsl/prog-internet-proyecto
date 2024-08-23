@@ -55,6 +55,18 @@
         9px 0 5px #ccc,
         0 9px 5px #ccc;
     border-radius: 18px;
+    animation: slide-in-div .8s;
+}
+@keyframes slide-in-div{
+    from{
+        opacity: 0;
+        translate: -75% 0;
+        scale: .5;
+    }
+    50%{
+        translate: 1.5em 0;
+        scale: .5;
+    }
 }
 #system-out-data > div > div{
     padding: 1.5em;
@@ -121,4 +133,106 @@
 #system-out-data a{
     color: var(--hl);
     text-decoration: none;
+}
+#ticket-builder-form input,
+#ticket-builder-form textarea{
+    margin: 1.5em 0;
+    padding: .5em 1em;
+    width: 100%;
+    display: block;
+    background-color: var(--bg);
+    border: none;
+    outline: none;
+    box-shadow:
+        -5px -5px 5px #fff,
+        5px 5px 5px #ccc;
+    border-radius: 10px;
+    font-size: 1em;
+}
+#ticket-builder-form textarea{
+    height: 12vh;
+    resize: none;
+}
+#ticket-builder-form p{
+    padding-top: .75em;
+}
+#tbf-file-upload-btn::-webkit-file-upload-button{
+    margin: .25em 1.5em .25em 0;
+    padding: .5em 1.5em;
+    background-color: var(--bg);
+    box-shadow:
+        -5px -5px 5px #fff,
+        5px 5px 5px #ccc;
+    border-radius: 9px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: .25s;
+}
+#tbf-file-upload-btn::-webkit-file-upload-button:hover{
+    color: var(--hl) !important;
+}
+#tbf-file-upload-btn::-webkit-file-upload-button:focus{
+    box-shadow:
+        -5px -5px 5px #fff,
+        inset 5px 5px 5px #ccc,
+        inset -5px -5px 5px #fff,
+        5px 5px 5px #ccc;
+}
+.input-file-charged::-webkit-file-upload-button{
+    color: var(--hl) !important;
+}
+#read-only-for-logged-username{
+    color: #333;
+}
+#read-only-for-logged-username::selection{
+    background-color: var(--bg);
+    color: #333;
+}
+#tbf-priority-options{
+    margin-left: 1em;
+    padding: .5em 1em;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    box-shadow:
+        -5px -5px 5px #fff,
+        5px 5px 5px #ccc;
+    cursor: pointer;
+}
+#tbf-priority-options,
+#tbf-priority-options option{
+    background-color: var(--bg);
+    font-size: 1em;
+}
+.lightbulb{
+    margin-left: 1em;
+    padding: 0 .35em;
+    border-radius: 1em;
+}
+#tbf-bttns{
+    padding: 1.5em 0;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 2em;
+}
+#tbf-bttns button{
+    padding: 1em;
+    width: 100%;
+    font-size: 1em;
+    box-shadow:
+        -5px -5px 5px #fff,
+        5px 5px 5px #ccc;
+    border-radius: 5px;
+    &:hover{
+        color: var(--hl);
+    }
+    &:focus{
+        color: var(--hl);
+        box-shadow:
+            -5px -5px 5px #fff,
+            inset 5px 5px 5px #ccc,
+            inset -5px -5px 5px #fff,
+            5px 5px 5px #ccc;
+    }
 }
