@@ -13,6 +13,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/php-serialize/1.0.0/php-serialize.min.js"></script>
 </head>
 <body>
 </body>
@@ -23,7 +24,7 @@
                     <h1>VIP Tickets Soluctions</h1>
                     <h2>Soporte técnico empresarial</h2>
                     <div>
-                        <a href="home.html" class="a-main-nav-menu">
+                        <a href="../php/general-board.php" class="a-main-nav-menu">
                             <button class="a-btn-from-nav-menu amnm-focused">Bandeja general</button>
                         </a>
                         <a href="board.html" class="a-main-nav-menu">
@@ -46,6 +47,8 @@
                     <div>
                         <div>
                             <h1 id="current-logged-user"></h1>
+                            <div id="table-php-response">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -58,6 +61,80 @@
             $.getJSON('../php/fetch_username.php', function(data){
                 $('#current-logged-user').text(`Sesión iniciada como: ${data.username}`);
             });
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const res = urlParams.get('res');
+
+            if(res){
+                const decodedData = decodeURIComponent(res);
+                const data = JSON.parse(decodedData);
+
+                let allForms = "";
+
+                if(data.length > 0 && !data.message){
+                    data.forEach(row => {
+
+                        var ticketID, from, subject, by, priority, status, assigned, timemark, datemark;
+
+                        Object.entries(row).forEach(([key, value], index) => {
+                            if(index == 0){
+                                ticketID = value;
+                            }else if(index == 1){
+                                from = value;
+                            }else if(index == 2){
+                                subject = value;
+                            }else if(index == 4){
+                                priority = value;
+                            }else if(index == 7){
+                                assigned = value;
+                            }else if(index == 8){
+                                timemark = value;
+                            }else if(index == 9){
+                                datemark = value;
+                            };
+                        });
+
+                        console.log(ticketID, from, subject, by, priority, assigned, timemark, datemark);
+                        var newTicketForm = `
+                                <form class="main-board-tickets-form-view" method="post" action="../php/view-ticket.php">
+                                    <div class="mbtfv-grid-view">
+                                        <div class="mbtfv-grid-view-data">
+                                            <div class="grid-area-1">
+                                                <img src="../media/ticket-card-preview-icon.png" alt="Ticket card preview icon">
+                                            </div>
+                                            <div class="grid-area-2">
+                                                <p><input type="text" name="${ticketID}" value="[000${ticketID}]" readonly> Asunto: <span>${subject}</span></p>
+                                            </div>
+                                            <div class="grid-area-3">
+                                                <p>De: <span>${from}</span></p>
+                                            </div>
+                                            <div class="grid-area-4">
+                                                <p>Estado: <span>${assigned}</span></p>
+                                            </div>
+                                            <div class="grid-area-5">
+                                                <p class="priority">${priority}</p>
+                                            </div>
+                                            <div class="grid-area-6">
+                                                <p>Creado el <span>${datemark}</span> a las <span>${timemark}</span>.</p>
+                                            </div>
+                                        </div>
+                                        <div class="mbtfv-grid-view-btn">
+                                            <button type="submit">Abrir</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            `
+                        allForms += newTicketForm;
+                    });
+                }else{
+                    allForms = '<p>No hay datos disponibles.</p>';
+                };
+
+                $('#table-php-response').html(allForms);
+
+            }else{
+                $('#table-php-response').html('<p>Error: No se recibieron datos.</p>');
+            };
         });
     </script>
 </html>

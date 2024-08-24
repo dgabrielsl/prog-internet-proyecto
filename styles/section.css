@@ -11,7 +11,8 @@
         transition: .55s;
     }
 }
-#form-insert-new-active button{
+#form-insert-new-active button,
+.main-board-tickets-form-view button{
     width: 100%;
     background-color: var(--bg);
     color: #000;
@@ -75,6 +76,7 @@
         -5px -5px 5px #fff,
         5px 5px 5px #ccc;
     border-radius: .5em;
+    overflow-y: auto;
 }
 #current-logged-user{
     padding: .75em 2em;
@@ -235,4 +237,75 @@
             inset -5px -5px 5px #fff,
             5px 5px 5px #ccc;
     }
+}
+.main-board-tickets-form-view{
+    margin: 2.25em 0;
+    padding: 1.5em;
+    box-shadow:
+        -9px 0 5px #fff,
+        0 -9px 5px #fff,
+        9px 0 5px #ccc,
+        0 9px 5px #ccc;
+    border-radius: 18px;
+}
+.mbtfv-grid-view{
+    display: grid;
+    grid-template-columns: 1fr 20%;
+}
+.mbtfv-grid-view-data{
+    display: grid;
+    grid-template-areas:
+        "picture header header header header"
+        "picture from assigned priority datetime";
+}
+.mbtfv-grid-view-data *{
+    font-size: 1em;
+}
+.grid-area-1{
+    margin: 0 1em;
+    padding: 1em;
+    grid-area: picture;
+    align-self: center;
+    justify-self: left;
+    box-shadow:
+        inset 5px 5px 5px #ccc,
+        inset -5px -5px 5px #fff;
+    border-radius: 50%;
+}
+.mbtfv-grid-view-data span{
+    color: #88320a;
+    font-weight: 700;
+}
+.grid-area-2{
+    grid-area: header;
+}
+.mbtfv-grid-view-data .grid-area-2 input{
+    background-color: var(--bg);
+    border: none;
+}
+.grid-area-3{
+    grid-area: from;
+}
+.grid-area-4{
+    grid-area: assigned;
+}
+.grid-area-5{
+    grid-area: priority;
+}
+.grid-area-6{
+    grid-area: datetime;
+}
+.main-board-tickets-form-view img{
+    height: 1.5em;
+    border-radius: 50%;
+}
+.mbtfv-grid-view-btn{
+    display: flex;
+    align-items: stretch;
+}
+.mbtfv-grid-view-btn button{
+    padding: .65em 0;
+    color: var(--hl);
+    font-size: 1.25em;
+    font-weight: 600;
 }

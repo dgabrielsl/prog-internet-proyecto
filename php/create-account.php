@@ -8,7 +8,7 @@ $conn = mysqli_connect($equipo, $usuario, $clave, $bbdd);
 
 if(!$conn){
     die("Error de conexión: " . mysqli_connect_error());
-}
+};
 
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $username = $_POST['username'];
