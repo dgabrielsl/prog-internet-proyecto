@@ -18,8 +18,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $result = mysqli_query($conn, $query);
 
     if(mysqli_num_rows($result) == 1){
-        header("Location: ../html/home.html?username=" . urldecode($username));
-
+        header("Location: ../php/general-board.php?username=" . urldecode($username));
+        
         $deleteQuery = "DELETE FROM session";
         mysqli_query($conn, $deleteQuery);
         
