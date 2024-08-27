@@ -309,3 +309,15 @@
     font-size: 1.25em;
     font-weight: 600;
 }
+#save-ticket-changes-box table{
+    width: 100%;
+    padding: 2em;
+}
+#save-ticket-changes-box table td{
+    padding: .5em;
+    margin: 1em;
+    min-width: 15em;
+    box-shadow:
+        0 -3px 3px #fff,
+        0 3px 3px #ccc;
+}

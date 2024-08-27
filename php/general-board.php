@@ -14,10 +14,10 @@ $data = array();
 if($result && mysqli_num_rows($result) > 0){
     while($row = mysqli_fetch_assoc($result)){
         $data[] = $row;
-    }
+    };
 }else{
     $data = array('message' => 'No hay tickets nuevos.');
-}
+};
 
 $json_data = json_encode($data);
 
